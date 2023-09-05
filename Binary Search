@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+ int binary(int a[10],int l,int h,int key)
+ {
+  while(l<=h)
+  {
+
+  int mid;
+  mid=(l+h)/2;
+  if(a[mid]==key)
+  {
+ 
+  return mid;
+}
+else if(a[mid]>=key)
+{
+h=mid-1;
+
+}
+else
+{
+l=mid+1;
+
+}
+}
+return -1;
+ 
+ }
+ int main()
+ {
+  int i,j,f,l,a[10],n,k,temp,mid;
+  printf("Enter the size of the array\n");
+  scanf("%d",&n);
+  printf("Enter the elements of array\n");
+  for(i=0;i<n;i++)
+  {
+  printf("a[%d]=",i);
+  scanf("%d",&a[i]);
+}
+for(i=0;i<n;i++)
+{
+for(j=0;j<n-1;j++)
+{
+if(a[j]>a[j+1])
+{
+temp=a[j];
+a[j]=a[j+1];
+a[j+1]=temp;
+}
+}
+}
+printf("Enter the key element\n");
+scanf("%d",&k);
+for(i=0;i<n;i++)
+{
+printf("\na[%d]=%d",i,a[i]);
+}
+int flag=binary(a,0,n-1,k);
+if(flag==-1)
+{
+printf("\n The Element %d is not found",k);
+}
+else
+{
+printf("\n The Element %d is found at %dth location",k,flag);
+}
+return 0;
+ }
