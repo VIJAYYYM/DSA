@@ -1,0 +1,179 @@
+#include<iostream>
+#include<conio.h>
+#include<cstdlib>
+using namespace std;
+void prims()
+{
+ int NOE;
+ /*cout<<"Enter the number of Edges:";
+ cin>>NOE;
+ int mat[NOE][NOE];
+ for(int i=0;i<NOE;i++)
+ {
+  for(int j=0;j<NOE;j++)
+  {
+   cout<<"Enter the cost for ["<<i<<","<<j<<"]:";
+   cin>>mat[i][j];
+  }
+ }*/
+ NOE=7;
+ int mat[NOE][NOE],near[NOE],c[NOE]={0,0,0,0,0,0,0},d[NOE]={0,0,0,0,0,0,0};
+ mat[0][0]=1000;
+ mat[0][1]=28;
+ mat[0][2]=1000;
+ mat[0][3]=1000;
+ mat[0][4]=1000;
+ mat[0][5]=10;
+ mat[0][6]=1000;
+ mat[1][0]=28;
+ mat[1][1]=1000;
+ mat[1][2]=16;
+ mat[1][3]=1000;
+ mat[1][4]=1000;
+ mat[1][5]=1000;
+ mat[1][6]=14;
+ mat[2][0]=1000;
+ mat[2][1]=16;
+ mat[2][2]=1000;
+ mat[2][3]=12;
+ mat[2][4]=1000;
+ mat[2][5]=1000;
+ mat[2][6]=1000;
+ mat[3][0]=1000;
+ mat[3][1]=1000;
+ mat[3][2]=12;
+ mat[3][3]=1000;
+ mat[3][4]=22;
+ mat[3][5]=1000;
+ mat[3][6]=18;
+ mat[4][0]=1000;
+ mat[4][1]=1000;
+ mat[4][2]=1000;
+ mat[4][3]=22;
+ mat[4][4]=1000;
+ mat[4][5]=25;
+ mat[4][6]=24;
+ mat[5][0]=10;
+ mat[5][1]=1000;
+ mat[5][2]=1000;
+ mat[5][3]=1000;
+ mat[5][4]=25;
+ mat[5][5]=1000;
+ mat[5][6]=1000;
+ mat[6][0]=1000;
+ mat[6][1]=14;
+ mat[6][2]=1000;
+ mat[6][3]=18;
+ mat[6][4]=24;
+ mat[6][5]=1000;
+ mat[6][6]=1000;
+ for(int i=0;i<NOE;i++)
+ {
+  for(int j=0;j<NOE;j++)
+  {
+   cout<<mat[i][j]<<"\t";
+  }
+  cout<<endl;
+ }
+ int min,k,l;
+ int s;
+ min=1000;
+ for(int i=0;i<NOE;i++)
+ {
+  for(int j=0;j<NOE;j++)
+  {
+   if(min>mat[i][j])
+   {
+    min=mat[i][j];
+    k=i;
+    l=j;
+   }
+  }
+ }
+ cout<<"\nmin="<<min<<"\nk="<<k<<"\nl="<<l;
+ for(int i=0;i<NOE;i++)
+ {
+  if(mat[i][l]<mat[i][k])
+  {
+   near[i]=l;
+  }
+  else
+  {
+   near[i]=k;
+  }
+ }
+ cout<<"\nNear {";
+ for(int i=0;i<NOE;i++)
+ {
+  cout<<"\t"<<near[i];
+ }
+ cout<<"\t}";
+ near[k]=near[l]=-1;
+ int min2=1000;
+ for(int j=1;j<NOE-1;j++)
+ {
+        for(int i=1;i<NOE;i++)
+        {
+            if(near[i]!=-1)
+            {
+                c[i]=mat[i][near[i]];
+                d[i-1]=i;
+            }
+        }
+        cout<<"\nc {\t";
+        for(int i=1;i<NOE;i++)
+        {
+            cout<<c[i]<<"\t";
+        }
+        cout<<"}";
+        for(int i=0;i<NOE;i++)
+        {
+            if(c[i]!=0)
+            {
+                if(min2>c[i])
+                {
+                    min2=c[i];
+                }
+            }
+        }
+        cout<<"\nmin2="<<min2;
+        for(int i=0;i<NOE-1;i++)
+        {
+            if(min2==c[i])
+            {
+                c[i]=0;
+                break;
+            }
+        }
+        for(int i=0;i<NOE-1;i++)
+        {
+            if(min2==mat[d[i]][near[d[i]]])
+            {
+                s=d[i];
+                break;
+            }
+        }
+        cout<<"\ns="<<s;
+        min=min+min2;
+        cout<<"\nmin="<<min;
+        near[s]=-1;
+        for(int i=0;i<NOE;i++)
+        {
+            if(near[i]!=-1 && (mat[i][near[i]]>mat[i][s]))
+            {
+                near[i]=s;
+            }
+        }
+        cout<<"\nNear {";
+        for(int i=0;i<NOE;i++)
+        {
+            cout<<"\t"<<near[i];
+        }
+        cout<<"\t}";
+        min2=1000;
+ }
+}
+int main()
+{
+ prims();
+}
