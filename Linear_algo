@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<time.h>
+int main()
+{
+clock_t t;
+    t = clock();    
+int a[10],i,n,key,flag=0;
+printf("\n Enter the size of the array:\n");
+scanf("%d",&n);
+printf("Enter the array element:\n");
+for(i=0;i<n;i++)
+{
+scanf("%d",&a[i]);
+}
+printf("Enter the key element:\n");
+scanf("%d",&key);
+for(i=0;i<n;i++)
+{
+if(a[i]==key)
+{
+flag=1;
+break;
+
+}
+}
+if(flag=1)
+{
+printf("\n The element %d is found at %dth location",key,i);
+}
+else
+{
+printf("\n The element %d is not found",key);
+}
+t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC;
+    printf("\nCompilation time=%f", time_taken);
+return 0;
+}
